@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@keyframes airplaneMove {
+  0% {
+    left: -15%; /* Starts from outside the screen */
+  }
+  100% {
+    left: 100%; /* Moves all the way to the right */
+  }
+}
+
+.airplane-animation {
+  animation: airplaneMove 15s linear infinite;
+}
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeZoomOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+@font-face {
+  font-family: 'Aristotelica Display';
+  src:url('/src/assets/Aristotelica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.animate-fade-zoom {
+  animation: fadeZoomIn 0.3s ease forwards;
+}
+
+.animate-fade-zoom.out {
+  animation: fadeZoomOut 0.3s ease forwards;
+}
