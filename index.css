@@ -1,10 +1,10 @@
 @import "tailwindcss";
 @keyframes airplaneMove {
   0% {
-    left: -15%; /* Starts from outside the screen */
+    left: -15%; 
   }
   100% {
-    left: 100%; /* Moves all the way to the right */
+    left: 100%; 
   }
 }
 
@@ -35,7 +35,7 @@
 
 @font-face {
   font-family: 'Aristotelica Display';
-  src:url('/assets/Aristotelica.ttf') format('truetype');
+  src:url('/Aristotelica.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

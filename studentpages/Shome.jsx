@@ -4,7 +4,6 @@ import Headerbar from "/components/headerbar.jsx";
 import Navbar from "/components/navbar.jsx";
 import Footer from "/components/footer.jsx";
 import front from "/assets/front.png";
-import Sparkv20 from "/assets/sparkv20.svg";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import axiosInstance from '/axiosinstance';
@@ -140,7 +139,7 @@ function Shome() {
       <div className="md:w-1/2 text-left mt-[-20px] md:mt-[-100px] pl-6 md:pl-12 lg:pl-16" data-aos="fade-right">
 
       <img 
-        src="/assets/sparkv20.svg" 
+        src="/sparkv20.svg" 
         alt="Sparkventure 2025" 
         className="w-4/5 md:w-3/4 lg:w-2/3 h-auto ml-[-1px] md:ml-[-10px] lg:ml-[-20px]" 
       />    
