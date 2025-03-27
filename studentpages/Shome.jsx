@@ -17,7 +17,6 @@ function Shome() {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const navigate = useNavigate();
-
   useEffect(() => {
 
     const token = localStorage.getItem("token");
@@ -225,9 +224,9 @@ function Shome() {
           >
             {/* Event Details */}
             <div className="flex flex-col sm:flex-row sm:items-center w-full justify-between space-y-2 sm:space-y-0 px-4">
-              <h3 className="text-xl font-semibold text-white text-center sm:text-left">{event.hackathonId.ename}</h3>
-              <p className="text-gray-700 text-sm text-center sm:text-left">Date: {formatDate(event.hackathonId.date)}</p>
-              <p className="text-gray-700 text-sm text-center sm:text-left">Venue: {event.hackathonId.venue}</p>
+              <h3 className="text-xl font-bold text-white text-center sm:text-left">{event.hackathonId.ename}</h3>
+              <p className="text-black font-semibold text-center sm:text-left">Date: {formatDate(event.hackathonId.date)}</p>
+              <p className="text-black font-semibold text-center sm:text-left">Venue: {event.hackathonId.venue}</p>
             </div>
 
             {/* Details Button (Responsive) */}
@@ -262,9 +261,9 @@ function Shome() {
           >
             {/* Event Details */}
             <div className="flex flex-col sm:flex-row sm:items-center w-full justify-between space-y-2 sm:space-y-0 px-4">
-              <h3 className="text-xl font-semibold text-white text-center sm:text-left">{event.hackathonId.ename}</h3>
-              <p className="text-gray-700 text-sm text-center sm:text-left">Date: {formatDate(event.hackathonId.date)}</p>
-              <p className="text-gray-700 text-sm text-center sm:text-left">Venue: {event.hackathonId.venue}</p>
+              <h3 className="text-xl font-bold text-white text-center sm:text-left">{event.hackathonId.ename}</h3>
+              <p className="text-black font-semibold text-center sm:text-left">Date: {formatDate(event.hackathonId.date)}</p>
+              <p className="text-black font-semibold text-center sm:text-left">Venue: {event.hackathonId.venue}</p>
             </div>
 
             {/* Details Button (Responsive) */}

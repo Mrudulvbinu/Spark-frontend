@@ -35,7 +35,8 @@
 
 @font-face {
   font-family: 'Aristotelica Display';
-  src:url('/Aristotelica.ttf') format('truetype');
+  src: url('/aristotelica.woff') format('woff'),
+         url('/aristotelica.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
