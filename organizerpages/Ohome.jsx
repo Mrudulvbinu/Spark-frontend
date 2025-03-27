@@ -57,7 +57,7 @@ function Ohome() {
         if (!response.data || response.data.length === 0) {
           console.warn("⚠ No upcoming events found.");
           setError("No upcoming events available.");
-          setUpcomingEvents([]); // Ensure empty array is set
+          setUpcomingEvents([]);
         } else {
           setUpcomingEvents(response.data);
         }
@@ -74,20 +74,12 @@ function Ohome() {
 
 
   return (
-    <div className="relative text-black">
-      <div className="absolute inset-0 z-[-1]">
-        <div
-          className="h-full w-full bg-cover bg-center bg-fixed"
-          style={{
-            backgroundImage: `url(${img})`,
-          }}
-        >
-          <div className="absolute inset-0 bg-white opacity-90"></div>
-        </div>
-      </div>
+    <section className="w-full mx-auto p-0 relative">
 
-      <div className="w-full"><Headerbar /></div>
-      <div className="w-full"><Navbar /></div>
+    <div className="relative z-10">
+      
+      <Headerbar />
+      <Navbar />
 
       <h2 className="text-5xl font-bold text-center text-black mt-15 mb-20" data-aos="fade-up">
         Conduct Team Hackathon and Virtual Solo Hackathon
@@ -97,22 +89,22 @@ function Ohome() {
       <div className="transform scale-85 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 justify-center" data-aos="fade-up">
         {/* Host Event Card */}
         <Link to="/hosthk" className="w-full flex justify-center">
-          <div className="max-w-lg bg-white shadow-lg rounded-lg p-8 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all">
-            <h2 className="text-3xl font-bold text-cyan-900">HOST EVENT</h2>
+          <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all">
+            <h2 className="text-3xl font-bold ">HOST EVENT</h2>
           </div>
         </Link>
 
         {/* Review and Approve Proposals Card */}
         <Link to="/revappro" className="w-full flex justify-center">
-          <div className="max-w-lg bg-white shadow-lg rounded-lg p-8 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all">
-            <h2 className="text-2xl font-bold text-blue-900">Review and Approve Proposals</h2>
+          <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all">
+            <h2 className="text-2xl font-bold">Review and Approve Proposals</h2>
           </div>
         </Link>
 
         {/* Approved and Rejected Proposals Card */}
         <Link to="/approreg" className="w-full flex justify-center">
-          <div className="max-w-lg bg-white shadow-lg rounded-lg p-8 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all">
-            <h2 className="text-2xl font-bold text-slate-600">Approved and Rejected Proposals</h2>
+          <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all">
+            <h2 className="text-2xl font-bold">Approved and Rejected Proposals</h2>
           </div>
         </Link>
       </div>
@@ -161,6 +153,8 @@ function Ohome() {
         !loading && !error && <p className="text-black text-center text-xl">No registered hackathons yet.</p>
       )}
 
+
+
       {/* Conducted Events */}
       <h2 className="text-6xl font-bold text-center text-black mt-20 mb-8" data-aos="fade-up">Conducted Events</h2>
       <div className="transform scale-85 flex flex-col space-y-6 justify-center" data-aos="fade-up">
@@ -185,6 +179,7 @@ function Ohome() {
 
       <div className="w-full"><Footer /></div>
     </div>
+    </section>
   );
 }
 

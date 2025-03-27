@@ -4,6 +4,7 @@ import Headerbar from "/components/headerbar.jsx";
 import Navbar from "/components/navbar.jsx";
 import Footer from "/components/footer.jsx";
 import front from "/assets/front.png";
+import Sparkv20 from "/assets/sparkv20.svg";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import axiosInstance from '/axiosinstance';
@@ -136,27 +137,32 @@ function Shome() {
         <Navbar />
 
       <div className="flex flex-col md:flex-row items-center justify-between px-8 md:px-16 lg:px-10 py-2 bg-white shadow-lg">
-        <div className="md:w-1/2 text-left mt-[-20px] md:mt-[-100px]" data-aos="fade-right">
-          <h2 className="text-5xl font-extrabold text-red-700 leading-tight">
-            Sparkventure 2025
-          </h2>
-          <h3 className="text-4xl font-bold text-black mt-2">
-            The Innovation Journey Starts Now!
-          </h3>
-          <p className="text-lg text-gray-700 mt-4 leading-relaxed">
-            The countdown has begun! Sparkventure 2025 is officially here, 
-            and we're calling all engineering and computer science students in Kerala 
-            to step up and showcase their groundbreaking ideas.
-          </p>
-          <p class="text-xl md:text-2xl font-bold bg-gradient-to-r from-red-600 to-amber-600
-          bg-clip-text text-transparent animate-pulse">Compete. Innovate. Transform.</p>
-        </div>
+      <div className="md:w-1/2 text-left mt-[-20px] md:mt-[-100px] pl-6 md:pl-12 lg:pl-16" data-aos="fade-right">
+
+      <img 
+        src="/assets/sparkv20.svg" 
+        alt="Sparkventure 2025" 
+        className="w-4/5 md:w-3/4 lg:w-2/3 h-auto ml-[-1px] md:ml-[-10px] lg:ml-[-20px]" 
+      />    
+    <h3 className="text-3xl font-bold text-rose-600 mt-2 animate-bounce	">
+      The Innovation Journey Starts Now!
+    </h3>
+    <p className="text-lg text-gray-700 mt-4 leading-relaxed">
+      The countdown has begun! Sparkventure 2025 is officially here, 
+      and we're calling all engineering and computer science students in Kerala 
+      to step up and showcase their groundbreaking ideas.
+    </p>
+    <p className="text-xl md:text-2xl font-bold bg-gradient-to-r from-rose-600 to-orange-400
+    bg-clip-text text-transparent animate-pulse">
+      Compete. Innovate. Transform.
+    </p>
+  </div>
 
         <div className="md:w-1/2 flex justify-center mt-[-20px] md:mt-[-20px]" data-aos="fade-left">
         <div class="relative group">
-            <div class="absolute inset-0 rounded-3xl bg-primary/20 blur-2xl group-hover:blur-3xl transition-all duration-500">
+            <div class="absolute inset-0 rounded-4xl bg-rose-200 blur-2xl group-hover:blur-3xl transition-all duration-500">
             </div>
-            <img alt="Sparkventure 2025 Image" width="500" height="500" decoding="async"
+            <img alt="Sparkventure 2025 Image" width="100" height="100" decoding="async"
              class="relative w-full max-w-sm h-auto drop-shadow-2xl transition-all duration-500
               group-hover:scale-105 group-hover:rotate-1 rounded-2xl" src={front}></img>
               </div>
@@ -168,7 +174,7 @@ function Shome() {
         <div className="flex flex-wrap justify-center gap-6 mt-10">
           {teamHackathons.length > 0 ? (
             teamHackathons.map((event) => (
-              <div key={event._id} className="bg-gradient-to-r from-red-500 to-orange-400 text-white p-6 rounded-lg shadow-lg max-w-md" data-aos="fade-up">
+              <div key={event._id} className="bg-gradient-to-r from-rose-600 to-orange-400 text-white p-6 rounded-lg shadow-lg max-w-md" data-aos="fade-up">
                 <h3 className="text-2xl font-bold">{event.ename}</h3>
                 <p className="text-lg">📅 Date: {event.date}</p>
                 <p className="text-lg">📍 Venue: {event.venue}</p>
@@ -189,7 +195,7 @@ function Shome() {
         <div className="flex flex-wrap justify-center gap-6 mt-10">
           {soloHackathons.length > 0 ? (
             soloHackathons.map((event) => (
-              <div key={event._id} className="bg-gradient-to-r from-amber-500 to-red-600 text-white p-6 rounded-lg shadow-lg max-w-md" data-aos="fade-up">
+              <div key={event._id} className="bg-gradient-to-r from-orange-400 to-rose-600 text-white p-6 rounded-lg shadow-lg max-w-md" data-aos="fade-up">
                 <h3 className="text-2xl font-bold">{event.ename}</h3>
                 <p className="text-lg">📅 Date: {event.date}</p>
                 <p className="text-lg">💻 Platform: {event.venue}</p>
@@ -215,7 +221,7 @@ function Shome() {
         {upcomingEvents.map((event) => (
           <div 
             key={event._id} 
-            className="bg-gradient-to-r from-red-600 to-yellow-400 rounded-lg shadow-lg p-4 w-2/3 mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
+            className="bg-gradient-to-r from-rose-600 to-orange-400 rounded-lg shadow-lg p-4 w-2/3 mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
             data-aos="fade-up"
           >
             {/* Event Details */}
@@ -252,7 +258,7 @@ function Shome() {
         {participatedEvents.map((event) => (
           <div 
             key={event._id} 
-            className="bg-gradient-to-r from-yellow-500 to-red-600 rounded-lg shadow-lg p-4 w-2/3 mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
+            className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-2/3 mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
             data-aos="fade-up"
           >
             {/* Event Details */}
