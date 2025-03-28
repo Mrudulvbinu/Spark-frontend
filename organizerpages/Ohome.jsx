@@ -85,87 +85,88 @@ function Ohome() {
         Conduct Team Hackathon and Virtual Solo Hackathon
       </h2>
 
-      {/* Host Event Card */}
+      {/*Cards */}
       <div className="transform scale-85 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 justify-center" data-aos="fade-up">
         {/* Host Event Card */}
         <Link to="/hosthk" className="w-full flex justify-center">
-          <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all">
+          <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8
+           flex flex-col items-center cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105">
             <h2 className="text-3xl font-bold ">HOST EVENT</h2>
           </div>
         </Link>
 
         {/* Review and Approve Proposals Card */}
         <Link to="/revappro" className="w-full flex justify-center">
-          <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all">
+          <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8
+           flex flex-col items-center cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105">
             <h2 className="text-2xl font-bold">Review and Approve Proposals</h2>
           </div>
         </Link>
 
         {/* Approved and Rejected Proposals Card */}
         <Link to="/approreg" className="w-full flex justify-center">
-          <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all">
+          <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8
+           flex flex-col items-center cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105">
             <h2 className="text-2xl font-bold">Approved and Rejected Proposals</h2>
           </div>
         </Link>
       </div>
 
-      {/* Spacing between sections */}
-      <div className="mt-12"></div>
-
+  <div className="w-full transform scale-80 container mx-auto p-4">
  {/* Upcoming Events Header */}
- <h2 className="text-6xl font-bold text-center text-black mt-20 mb-8" data-aos="fade-up">
-        Upcoming Events
-      </h2>
-
-      {/* Loading State */}
-      {loading && (
-        <p className="text-center text-black text-xl animate-pulse">Loading events...</p>
-      )}
-
-      {/* Error State */}
-      {error && !loading && (
-        <p className="text-red-500 text-center text-xl">{error}</p>
-      )}
+ <section className="my-8">
+ <h2 className="text-6xl font-bold text-black text-center mb-10" data-aos="fade-up">
+  Upcoming Events</h2>
 
       {/* Upcoming Events List */}
-      {!loading && !error && upcomingEvents.length > 0 ? (
-        <div className="transform scale-85 flex flex-col space-y-6 justify-center" data-aos="fade-up">
+      {upcomingEvents.length > 0 ? (
+        <div className="space-y-6 justify-center">
           {upcomingEvents.map((event) => (
-            <div key={event._id} className="w-full bg-white shadow-lg rounded-full py-4 px-6 mx-auto flex justify-between items-center" data-aos="fade-up">
+            <div
+             key={event._id}
+             className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-2/3 mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
+            data-aos="fade-up"
+          >
+            {/* Event Details */}
               <div className="flex-1 text-left">
-                <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">{event.ename}</h2>
+                <h2 className="text-xl font-bold text-white text-center sm:text-left animate-pulse">{event.ename}</h2>
               </div>
               <div className="flex-1 text-left sm:ml-4 ml-2">
-                <p className="text-gray-600">📅 Date: {event.date ? new Date(event.date).toLocaleDateString() : "N/A"}</p>
+                <p className="text-black font-semibold text-center sm:text-left">📅 Date: {event.date ? new Date(event.date).toLocaleDateString() : "N/A"}</p>
               </div>
               <div className="flex-1 text-left sm:ml-4 ml-2">
-                <p className="text-gray-600">{event.isTeamHackathon === true ? "📍 Venue" : "💻 Platform"}: {event.venue || "N/A"}</p>
+                <p className="text-black font-semibold text-center sm:text-left">{event.isTeamHackathon === true ? "📍 Venue" : "💻 Platform"}: {event.venue || "N/A"}</p>
               </div>
-      <div className="flex-none ml-auto">
-        <button   onClick={() => navigate(`/regstud/${event._id}`)} 
-        className="bg-blue-500 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 shadow-md">
-        Registered Students</button>
+
+              <div className="flex justify-center sm:justify-end w-full sm:w-auto">
+              <button
+        className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold w-full sm:w-auto cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110"
+        onClick={() => navigate(`/regstud/${event._id}`)}  
+        >
+        Registered Students
+        </button>
       </div>
-            </div>
+    </div>
           ))}
         </div>
       ) : (
-        !loading && !error && <p className="text-black text-center text-xl">No registered hackathons yet.</p>
+        <p className="text-black text-center text-xl" data-aos="fade-up">No registered hackathons yet.</p>
       )}
-
+</section>
 
 
       {/* Conducted Events */}
-      <h2 className="text-6xl font-bold text-center text-black mt-20 mb-8" data-aos="fade-up">Conducted Events</h2>
+      <h2 className="text-6xl font-bold text-center text-black mt-20 mb-10" data-aos="fade-up">Conducted Events</h2>
       <div className="transform scale-85 flex flex-col space-y-6 justify-center" data-aos="fade-up">
         {[ 
           { title: "CodeRed 2024", date: "22/12/2024", details: "Additional details about the event can go here." },
           { title: "Hackat24", date: "12/8/2024", details: "Details for this event. Aligned neat and readable." },
           { title: "Project24", date: "1/11/2024", details: "Any extra details about this event go here, uniformity." }
         ].map((event, index) => (
-          <div key={index} className="w-full bg-white shadow-lg rounded-full py-4 px-6 mx-auto flex justify-between items-center" data-aos="fade-up">
+          <div key={index} className="w-full bg-gradient-to-r from-orange-400 to-rose-600 text-white  shadow-lg rounded-full py-4 px-6 mx-auto flex justify-between 
+          items-center" data-aos="fade-up">
             <div className="flex-1 text-left">
-              <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">{event.title}</h2>
+              <h2 className="text-xl sm:text-2xl font-semibold">{event.title}</h2>
             </div>
             <div className="flex-1 text-left ml-4">
               <p className="text-gray-600">{event.date}</p>
@@ -176,9 +177,10 @@ function Ohome() {
           </div>
         ))}
       </div>
-
-      <div className="w-full"><Footer /></div>
     </div>
+    </div>
+    <div className="w-full"><Footer /></div>
+
     </section>
   );
 }

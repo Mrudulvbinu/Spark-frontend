@@ -130,9 +130,10 @@ function Shome() {
   return (
     <section className="w-full mx-auto p-0 relative">
 
-      <div className="relative z-10">
-        <Headerbar />
-        <Navbar />
+    <div className="relative z-10">
+
+      <Headerbar />
+      <Navbar />
 
       <div className="flex flex-col md:flex-row items-center justify-between px-8 md:px-16 lg:px-10 py-2 bg-white shadow-lg">
       <div className="md:w-1/2 text-left mt-[-20px] md:mt-[-100px] pl-6 md:pl-12 lg:pl-16" data-aos="fade-right">
@@ -172,14 +173,15 @@ function Shome() {
         <div className="flex flex-wrap justify-center gap-6 mt-10">
           {teamHackathons.length > 0 ? (
             teamHackathons.map((event) => (
-              <div key={event._id} className="bg-gradient-to-r from-rose-600 to-orange-400 text-white p-6 rounded-lg shadow-lg max-w-md" data-aos="fade-up">
+              <div key={event._id} className="bg-gradient-to-r from-rose-600 to-orange-400 text-white p-6 rounded-lg
+               shadow-lg max-w-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-103" data-aos="fade-up">
                 <h3 className="text-2xl font-bold">{event.ename}</h3>
                 <p className="text-lg">📅 Date: {event.date}</p>
                 <p className="text-lg">📍 Venue: {event.venue}</p>
                 <p className="text-lg">🏆 Prize: {event.prize}</p>
                 <div className="flex justify-between mt-3">
-                  <button onClick={() => handleRegister(event)} className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold">Register</button>
-                  <button onClick={() => handleDetailsClick(event)} className="bg-white text-black px-4 py-2 rounded-lg font-bold">Details</button>
+                  <button onClick={() => handleRegister(event)} className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">Register</button>
+                  <button onClick={() => handleDetailsClick(event)} className="bg-white text-black px-4 py-2 rounded-lg font-bold cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">Details</button>
                 </div>
               </div>
             ))
@@ -193,14 +195,14 @@ function Shome() {
         <div className="flex flex-wrap justify-center gap-6 mt-10">
           {soloHackathons.length > 0 ? (
             soloHackathons.map((event) => (
-              <div key={event._id} className="bg-gradient-to-r from-orange-400 to-rose-600 text-white p-6 rounded-lg shadow-lg max-w-md" data-aos="fade-up">
+              <div key={event._id} className="bg-gradient-to-r from-orange-400 to-rose-600 text-white p-6 rounded-lg shadow-lg max-w-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-103" data-aos="fade-up">
                 <h3 className="text-2xl font-bold">{event.ename}</h3>
                 <p className="text-lg">📅 Date: {event.date}</p>
                 <p className="text-lg">💻 Platform: {event.venue}</p>
                 <p className="text-lg">🏆 Prize: {event.prize}</p>
                 <div className="flex justify-between mt-3">
-                  <button onClick={() => handleRegister(event)} className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold">Register</button>
-                  <button onClick={() => handleDetailsClick(event)} className="bg-white text-black px-4 py-2 rounded-lg font-bold">Details</button>
+                  <button onClick={() => handleRegister(event)} className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">Register</button>
+                  <button onClick={() => handleDetailsClick(event)} className="bg-white text-black px-4 py-2 rounded-lg font-bold cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">Details</button>
                 </div>
               </div>
             ))
@@ -208,31 +210,36 @@ function Shome() {
             <p className="text-black text-center text-xl" data-aos="fade-up">No solo hackathons available.</p>
           )}
         </div>
-        <div className="w-full transform scale-80 container mx-auto p-4">
-  {/* Upcoming Registered Events */}
+
+  <div className="w-full transform scale-80 container mx-auto p-4">
+  {/* Upcoming Events header */}
   <section className="my-8">
-    <h2 className="text-6xl font-bold text-black text-center mb-10" data-aos="fade-up">
-      Upcoming Registered Events
-    </h2>
+  <h2 className="text-6xl font-bold text-black text-center mb-10" data-aos="fade-up">
+  Upcoming Registered Events</h2>
+
+    {/* Upcoming Events List */}
     {upcomingEvents.length > 0 ? (
-      <div className="space-y-4">
+      <div className="space-y-6 justify-center">
         {upcomingEvents.map((event) => (
-          <div 
-            key={event._id} 
-            className="bg-gradient-to-r from-rose-600 to-orange-400 rounded-lg shadow-lg p-4 w-2/3 mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
-            data-aos="fade-up"
-          >
+           <div 
+           key={event._id}
+           className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-2/3 mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
+           data-aos="fade-up"
+         >
             {/* Event Details */}
-            <div className="flex flex-col sm:flex-row sm:items-center w-full justify-between space-y-2 sm:space-y-0 px-4">
-              <h3 className="text-xl font-bold text-white text-center sm:text-left">{event.hackathonId.ename}</h3>
-              <p className="text-black font-semibold text-center sm:text-left">Date: {formatDate(event.hackathonId.date)}</p>
-              <p className="text-black font-semibold text-center sm:text-left">Venue: {event.hackathonId.venue}</p>
+            <div className="flex-1 text-left">
+            <h3 className="text-xl font-bold text-white text-center sm:text-left animate-pulse">{event.hackathonId.ename}</h3>
+            </div>
+            <div className="flex-1 text-left sm:ml-4 ml-2">
+            <p className="text-black font-semibold text-center sm:text-left">📅 Date: {formatDate(event.hackathonId.date)}</p>
+            </div>
+            <div className="flex-1 text-left sm:ml-4 ml-2">
+            <p className="text-black font-semibold text-center sm:text-left">{event.hackathonId.isTeamHackathon === true ? "📍 Venue" : "💻 Platform"}: {event.hackathonId.venue || "N/A"}</p>
             </div>
 
-            {/* Details Button (Responsive) */}
             <div className="flex justify-center sm:justify-end w-full sm:w-auto">
               <button 
-                className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold w-full sm:w-auto"
+                className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold w-full sm:w-auto cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110"
                 onClick={() => handleDetailsClick(event, true)}
               >
                 Details
@@ -242,7 +249,7 @@ function Shome() {
         ))}
       </div>
     ) : (
-      <p className="text-black text-center" data-aos="fade-up">No upcoming events registered.</p>
+      <p className="text-black text-center text-xl" data-aos="fade-up">No upcoming events registered.</p>
     )}
   </section>
 
@@ -269,7 +276,7 @@ function Shome() {
             {/* Details Button (Responsive) */}
             <div className="flex justify-center sm:justify-end w-full sm:w-auto">
               <button 
-                className="bg-white text-red-700 px-4 py-2 rounded-md font-bold w-full sm:w-auto"
+                className="bg-white text-red-700 px-4 py-2 rounded-md font-bold w-full sm:w-auto cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110"
                 onClick={() => handleDetailsClick(event, true)}
               >
                 Details
