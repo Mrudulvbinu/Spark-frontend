@@ -85,7 +85,6 @@ function Shome() {
     let eventData = {};
 
     if (event.hackathonId) {
-        //Mapping for registered events (upcoming/participated)
         eventData = {
             _id: event.hackathonId._id,
             ename: event.hackathonId.ename,
@@ -100,7 +99,6 @@ function Shome() {
             isRegisteredEvent: true,
         };
     } else {
-        //Mapping for regular hackathon events
         eventData = {
             _id: event._id,
             ename: event.ename,
@@ -174,7 +172,7 @@ function Shome() {
           {teamHackathons.length > 0 ? (
             teamHackathons.map((event) => (
               <div key={event._id} className="bg-gradient-to-r from-rose-600 to-orange-400 text-white p-6 rounded-lg
-               shadow-lg max-w-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-103" data-aos="fade-up">
+               shadow-lg max-w-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105" data-aos="fade-up">
                 <h3 className="text-2xl font-bold">{event.ename}</h3>
                 <p className="text-lg">📅 Date: {event.date}</p>
                 <p className="text-lg">📍 Venue: {event.venue}</p>
@@ -195,7 +193,7 @@ function Shome() {
         <div className="flex flex-wrap justify-center gap-6 mt-10">
           {soloHackathons.length > 0 ? (
             soloHackathons.map((event) => (
-              <div key={event._id} className="bg-gradient-to-r from-orange-400 to-rose-600 text-white p-6 rounded-lg shadow-lg max-w-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-103" data-aos="fade-up">
+              <div key={event._id} className="bg-gradient-to-r from-orange-400 to-rose-600 text-white p-6 rounded-lg shadow-lg max-w-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105" data-aos="fade-up">
                 <h3 className="text-2xl font-bold">{event.ename}</h3>
                 <p className="text-lg">📅 Date: {event.date}</p>
                 <p className="text-lg">💻 Platform: {event.venue}</p>
@@ -223,7 +221,7 @@ function Shome() {
         {upcomingEvents.map((event) => (
            <div 
            key={event._id}
-           className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-2/3 mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
+           className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-4/5  sm:w-3/4 lg:w-[85%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
            data-aos="fade-up"
          >
             {/* Event Details */}
@@ -263,7 +261,7 @@ function Shome() {
         {participatedEvents.map((event) => (
           <div 
             key={event._id} 
-            className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-2/3 mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
+            className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-4/5  sm:w-3/4 lg:w-[85%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
             data-aos="fade-up"
           >
             {/* Event Details */}
@@ -308,14 +306,14 @@ function Shome() {
             <p className="text-lg"><strong>Duration:</strong> {selectedEvent.durofhk}</p>
             <p className="text-lg"><strong>Prize:</strong> {selectedEvent.prize}</p>
             <p className="text-lg"><strong>Details:</strong> {selectedEvent.details}</p>
-            <p className="text-lg"><strong>Last date of registration:</strong> {selectedEvent.regend}</p>
             {selectedEvent.typeofhk === 'Team Hackathon (offline)' && (
             <p className="text-lg"><strong>Maximum number of participants:</strong> {selectedEvent.maxTeamMembers}</p>)}
       
       {/* Conditionally Show Register Button */}
       {!selectedEvent.isRegisteredEvent && (
         <div className="flex justify-center mt-6">
-          <button onClick={() => handleRegister(selectedEvent)} className="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-800">Register</button>
+        <p className="text-lg"><strong>Last date of registration:</strong> {selectedEvent.regend}</p>
+        <button onClick={() => handleRegister(selectedEvent)} className="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-800">Register</button>
         </div>
       )}
     </div>

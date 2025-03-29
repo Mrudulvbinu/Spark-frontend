@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://spark-backend-5v4v.onrender.com/api',
-  withCredentials: true, 
+  baseURL: process.env.NODE_ENV === "development"
+  ? "http://localhost:5000/api"  // Use local backend in development mode
+  : "https://spark-backend-5v4v.onrender.com/api",  // Use Render backend in production
+withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(

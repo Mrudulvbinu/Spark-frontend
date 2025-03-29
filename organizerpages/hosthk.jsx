@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import img from "/assets/img3.jpg";
 import Headerbar from "/components/headerbar.jsx";
 import Navbar from "/components/navbar.jsx";
 import Footer from "/components/footer.jsx";
@@ -10,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 const Hosthk = () => {
     const navigate = useNavigate();
     const [typeofhk, setTypeofhk] = useState('Team Hackathon (offline)');
-    // State for form data
     const [formData, setFormData] = useState({
         typeofhk: "Team Hackathon (offline)",
         ename: "",
@@ -24,14 +22,12 @@ const Hosthk = () => {
         isTeamHackathon: true,
     });
 
-    // Track label text for Venue/Platform
     const [venueLabel, setVenueLabel] = useState("Event Venue");
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    // Handle form input changes
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value,
@@ -39,7 +35,7 @@ const Hosthk = () => {
 
         if (name === "typeofhk") {
             setVenueLabel(value === "Virtual Solo Hackathon (online)" ? "Event Platform" : "Event Venue");
-            setTypeofhk(value); // ✅ Keep typeofhk in sync
+            setTypeofhk(value); 
         }
     };
 
@@ -53,7 +49,7 @@ const Hosthk = () => {
         }
 
         try {
-            console.log("📢 Sending request with data:", formData);
+            console.log(" Sending request with data:", formData);
             const response = await axiosInstance.post("/hackathons/add",formData ,{
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -62,9 +58,8 @@ const Hosthk = () => {
 
             alert(response.data.message || "Hackathon added successfully!");
 
-            // Reset form after submission
             setFormData({
-                typeofhk: "Team Hackathon (offline)", // Reset to default option
+                typeofhk: "Team Hackathon (offline)", 
                 ename: "",
                 venue: "",
                 date: "",
@@ -76,21 +71,16 @@ const Hosthk = () => {
                 isTeamHackathon: true,
             });
             setVenueLabel("Event Venue");
-            setTypeofhk("Team Hackathon (offline)"); // Reset typeofhk state as well
+            setTypeofhk("Team Hackathon (offline)"); 
 
         } catch (error) {
-            console.error("❌ Error submitting form:", error.response?.data || error.message);
+            console.error(" Error submitting form:", error.response?.data || error.message);
             alert(error.response?.data?.message || "Failed to host hackathon. Please try again.");
         }
     };
 
     return (
         <div className="relative">
-            <div className="absolute inset-0 z-[-1]">
-                <div className="h-full w-full bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${img})` }}>
-                    <div className="absolute inset-0 bg-black opacity-30"></div>
-                </div>
-            </div>
 
             <Headerbar />
             <Navbar />
@@ -137,8 +127,6 @@ const Hosthk = () => {
     </div>
 ))}
 
-
-{/* Duration of Hackathon */}
 <div className="flex items-center space-x-4">
                         <label className="w-1/3 font-bold text-lg text-gray-700 text-right">
                             Duration of Hackathon:

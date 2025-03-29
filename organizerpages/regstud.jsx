@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "/axiosinstance";
-import minimal from "/assets/img4.jpeg";
 
 const RegStud = () => {
   const { hackathonId } = useParams();  
@@ -41,26 +40,19 @@ const RegStud = () => {
   
 
   return (
-    <div className="relative text-black">
-      <div className="absolute inset-0 z-[-1]">
-        <div 
-          className="h-full w-full bg-cover bg-center" 
-          style={{ backgroundImage: `url(${minimal})` }}
-        >
-          <div className="absolute inset-0 bg-white/70"></div>
-        </div>
-      </div>
+    <div className="relative text-black bg-gradient-to-r from-rose-600 to-orange-400">
+    
         <div className="min-h-screen flex items-center justify-center p-6 relative">
         <div className="w-full max-w-5xl bg-white shadow-xl rounded-lg p-6">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-6">Registered Students</h2>
-            {loading && <p className="text-center text-gray-700 text-lg animate-pulse">Loading...</p>}
+          <h2 className="text-3xl font-bold text-center text-black mb-6">Registered Students</h2>
+            {loading && <p className="text-center text-black text-lg animate-pulse">Loading...</p>}
             {error && !loading && <p className="text-center text-red-500 text-lg">{error}</p>}
   
           {!loading && !error && registrations.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="w-full border-collapse border border-gray-300">
                 <thead>
-                  <tr className="bg-blue-500 text-white">
+                  <tr className="bg-rose-600 text-white">
                     <th className="p-3 text-left">#</th>
                     <th className="p-3 text-left">Team Name</th>
                     <th className="p-3 text-left">Name</th>
@@ -92,7 +84,7 @@ const RegStud = () => {
                         )}
                       </td>
                         <td className="p-3 text-center">
-                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm transition-all">
+                        <button className="bg-orange-400 hover:bg-orange-600 text-white px-4 py-2 font-bold rounded-lg text-sm cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">
                           Details
                         </button>
                       </td>
