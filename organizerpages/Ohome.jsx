@@ -4,8 +4,10 @@ import axiosInstance from "/axiosinstance";
 import Headerbar from "/components/headerbar.jsx";
 import Navbar from "/components/navbar.jsx";
 import Footer from "/components/footer.jsx";
+import { format } from 'date-fns';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
 
 function Ohome() {
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ function Ohome() {
       window.onpopstate = null;
       window.onpushstate = null;  
     }
-
+    
     AOS.init({ duration: 1000, easing: 'ease-in-out', once: true });
 
     let storedOrganizerId = localStorage.getItem("organizerId");
@@ -91,7 +93,7 @@ function Ohome() {
         {/* Host Event Card */}
         <Link to="/hosthk" className="w-full flex justify-center">
           <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8
-           flex flex-col items-center cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105">
+           flex flex-col items-center cursor-pointer hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105">
             <h2 className="text-5xl font-bold "> HOST EVENT </h2>
           </div>
         </Link>
@@ -133,7 +135,7 @@ function Ohome() {
                 <h2 className="text-2xl font-bold text-white text-center sm:text-left animate-pulse">{event.ename}</h2>
               </div>
               <div className="flex-1 text-left sm:ml-4 ml-2">
-                <p className="text-black font-semibold text-center sm:text-left">📅 Date: {event.date ? new Date(event.date).toLocaleDateString() : "N/A"}</p>
+                <p className="text-black font-semibold text-center sm:text-left">📅 Date: {event.date ? format(new Date(event.date), 'dd MMMM yyyy') : "N/A"}</p>
               </div>
               <div className="flex-1 text-left sm:ml-4 ml-2">
                 <p className="text-black font-semibold text-center sm:text-left">{event.isTeamHackathon === true ? "📍 Venue" : "💻 Platform"}: {event.venue || "N/A"}</p>
@@ -142,8 +144,7 @@ function Ohome() {
               <div className="flex justify-center sm:justify-end w-full sm:w-auto">
               <button
         className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold w-full sm:w-auto cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110"
-        onClick={() => navigate(`/regstud/${event._id}`)}  
-        >
+        onClick={() => navigate(`/regstud/${event._id}`)}  >
         Registered Students
         </button>
       </div>
@@ -170,7 +171,7 @@ function Ohome() {
          {/* Event Details */}
          <div className="flex flex-col sm:flex-row sm:items-center w-full justify-between space-y-2 sm:space-y-0 px-4">
               <h3 className="text-xl font-bold text-white text-center sm:text-left">{event.ename}</h3>
-              <p className="text-black font-semibold text-center sm:text-left">Date: {event.date}</p>
+              <p className="text-black font-semibold text-center sm:text-left">Date: {format(new Date(event.date), 'dd MMMM yyyy')}</p>
               <p className="text-black font-semibold text-center sm:text-left">Venue: {event.venue}</p>
             </div>
             </div>

@@ -1,26 +1,4 @@
 @import "tailwindcss";
-@keyframes airplaneMove {
-  0% {
-    left: -15%; 
-  }
-  100% {
-    left: 100%; 
-  }
-}
-
-.airplane-animation {
-  animation: airplaneMove 15s linear infinite;
-}
-@keyframes fadeZoomIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 
 @keyframes fadeZoomOut {
   0% {
@@ -30,6 +8,17 @@
   100% {
     opacity: 0;
     transform: scale(0.7);
+  }
+}
+
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -48,3 +37,5 @@
 .animate-fade-zoom.out {
   animation: fadeZoomOut 0.3s ease forwards;
 }
+
+@tailwind utilities;
