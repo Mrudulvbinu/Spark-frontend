@@ -254,16 +254,14 @@ function Shome() {
   {/* Participated Events */}
   <section className="my-8 mt-20">
     <h2 className="text-6xl font-bold text-black text-center mb-10 mt-30" data-aos="fade-up">
-    Participated Events
-    </h2>
+    Participated Events</h2>
     {participatedEvents.length > 0 ? (
       <div className="space-y-4">
         {participatedEvents.map((event) => (
           <div 
             key={event._id} 
             className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-4/5  sm:w-3/4 lg:w-[85%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
-            data-aos="fade-up"
-          >
+            data-aos="fade-up">
             {/* Event Details */}
             <div className="flex flex-col sm:flex-row sm:items-center w-full justify-between space-y-2 sm:space-y-0 px-4">
               <h3 className="text-xl font-bold text-white text-center sm:text-left">{event.hackathonId.ename}</h3>
@@ -280,6 +278,7 @@ function Shome() {
                 Details
               </button>
             </div>
+            
           </div>
         ))}
       </div>

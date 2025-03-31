@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from "/axiosinstance"; 
-import img from "/assets/img4.jpeg";
 import Headerbar from "/components/headerbar.jsx";
 import Navbar from "/components/navbar.jsx";
 import Footer from "/components/footer.jsx";
@@ -10,12 +9,13 @@ import 'aos/dist/aos.css';
 
 function Ohome() {
   const navigate = useNavigate();
-  const [upcomingEvents, setUpcomingEvents] = useState([]);
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null); 
+  const [upcominEvents, setUpcominEvents] = useState([]);
+  const [conductedEvents, setConductedEvents] = useState([]);
   const [organizerId, setOrganizerId] = useState(null);
 
+
   useEffect(() => {
+
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/", { replace: true });
@@ -43,33 +43,34 @@ function Ohome() {
     }
 
     setOrganizerId(storedOrganizerId); 
-
     console.log(" Using Organizer ID:", storedOrganizerId);
 
-    const fetchUpcomingEvents = async () => {
+
+
+    const fetchData = async () => {
       try {
-        console.log(` Fetching upcoming events for Organizer ID: ${storedOrganizerId}`);
-        
-        const response = await axiosInstance.get(`/registeredhackathon/organizer/${storedOrganizerId}/upcoming-events`);
 
-        console.log(" API Response:", response.data);
+        const organizerId=localStorage.getItem('organizerId')
+        console.log("Fetching events for Organizer ID:",organizerId);
 
-        if (!response.data || response.data.length === 0) {
-          console.warn("⚠ No upcoming events found.");
-          setError("No upcoming events available.");
-          setUpcomingEvents([]);
-        } else {
-          setUpcomingEvents(response.data);
+        if (!organizerId) {
+          console.error("No Organizer ID found. Please log in again.");
+          return;
         }
-      } catch (err) {
-        console.error(" Error fetching upcoming events:", err.response?.data || err.message);
-        setError(`Failed to fetch upcoming events: ${err.response?.data?.message || err.message}`);
-      } finally {
-        setLoading(false);
+        
+        const  [ upcominRes, conductedRes]= await Promise.all([
+          axiosInstance.get(`/registeredhackathon/organizer/${storedOrganizerId}?type=upcomin`),
+          axiosInstance.get(`/registeredhackathon/organizer/${storedOrganizerId}?type=conducted`)          
+        ]);
+
+        setUpcominEvents(upcominRes.data);
+        setConductedEvents(conductedRes.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     };
-
-    fetchUpcomingEvents();
+   
+    fetchData();
   }, []);
 
 
@@ -119,9 +120,9 @@ function Ohome() {
   Upcoming Events</h2>
 
       {/* Upcoming Events List */}
-      {upcomingEvents.length > 0 ? (
+      {upcominEvents.length > 0 ? (
         <div className="space-y-6 justify-center">
-          {upcomingEvents.map((event) => (
+          {upcominEvents.map((event) => (
             <div
              key={event._id}
              className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-4/5  sm:w-3/4 lg:w-[85%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
@@ -157,34 +158,32 @@ function Ohome() {
 
       {/* Conducted Events */}
       <section className="my-8">
-      <h2 className="text-6xl font-bold text-center text-black mt-50 mb-10" data-aos="fade-up">Conducted Events</h2>
-      <div className="transform scale-85 flex flex-col space-y-6 justify-center" data-aos="fade-up">
-        {[ 
-          { title: "CodeRed 2024", date: "22/12/2024", details: "Additional details about the event can go here." },
-          { title: "Hackat24", date: "12/8/2024", details: "Details for this event. Aligned neat and readable." },
-          { title: "Project24", date: "1/11/2024", details: "Any extra details about this event go here, uniformity." }
-        ].map((event, index) => (
-          <div key={index} className="w-full bg-gradient-to-r from-orange-400 to-rose-600 text-white  shadow-lg rounded-full py-4 px-6 mx-auto flex justify-between 
-          items-center" data-aos="fade-up">
-            <div className="flex-1 text-left">
-              <h2 className="text-xl sm:text-2xl font-semibold">{event.title}</h2>
+      <h2 className="text-6xl font-bold text-center text-black mt-50 mb-10" data-aos="fade-up">
+      Conducted Events</h2>
+      {conductedEvents.length > 0 ? (
+      <div className="space-y-4">
+        {conductedEvents.map((event) => (
+          <div 
+            key={event._id} 
+            className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-4/5  sm:w-3/4 lg:w-[85%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
+            data-aos="fade-up">
+         {/* Event Details */}
+         <div className="flex flex-col sm:flex-row sm:items-center w-full justify-between space-y-2 sm:space-y-0 px-4">
+              <h3 className="text-xl font-bold text-white text-center sm:text-left">{event.ename}</h3>
+              <p className="text-black font-semibold text-center sm:text-left">Date: {event.date}</p>
+              <p className="text-black font-semibold text-center sm:text-left">Venue: {event.venue}</p>
             </div>
-            <div className="flex-1 text-left ml-4">
-              <p className="text-gray-600">{event.date}</p>
             </div>
-            <div className="flex-1 text-left ml-4">
-              <p className="text-gray-600">{event.details}</p>
-            </div>
-          </div>
-        ))}
+      ))}
       </div>
+       ) : (
+        <p className="text-black text-center" data-aos="fade-up">No participated events.</p>
+      )}
       </section>
-
-      
-    </div>
-    </div>
+</div>
+    
     <div className="w-full"><Footer /></div>
-
+</div>
     </section>
   );
 }
