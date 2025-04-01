@@ -47,8 +47,6 @@ function Ohome() {
     setOrganizerId(storedOrganizerId); 
     console.log(" Using Organizer ID:", storedOrganizerId);
 
-
-
     const fetchData = async () => {
       try {
 
@@ -74,6 +72,24 @@ function Ohome() {
    
     fetchData();
   }, []);
+
+  const handleGenerateReport = async (hackathonId, eventName) => {
+    try {
+      const response = await axiosInstance.get(`/hackathons/generate-report/${hackathonId}`, {
+        responseType: "blob",
+      });
+  
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `Hackathon_Report_${eventName}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("❌ Error generating report:", error);
+    }
+  };
 
 
   return (
@@ -152,7 +168,7 @@ function Ohome() {
           ))}
         </div>
       ) : (
-        <p className="text-black text-center text-xl" data-aos="fade-up">No registered hackathons yet.</p>
+        <p className="text-black text-center text-3xl" data-aos="fade-up">No registered hackathons yet.</p>
       )}
 </section>
 
@@ -166,19 +182,31 @@ function Ohome() {
         {conductedEvents.map((event) => (
           <div 
             key={event._id} 
-            className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-4/5  sm:w-3/4 lg:w-[85%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
+            className="bg-gradient-to-r from-rose-600 to-orange-400 rounded-lg shadow-lg p-4 w-4/5  sm:w-3/4 lg:w-[85%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
             data-aos="fade-up">
-         {/* Event Details */}
-         <div className="flex flex-col sm:flex-row sm:items-center w-full justify-between space-y-2 sm:space-y-0 px-4">
-              <h3 className="text-xl font-bold text-white text-center sm:text-left">{event.ename}</h3>
-              <p className="text-black font-semibold text-center sm:text-left">Date: {format(new Date(event.date), 'dd MMMM yyyy')}</p>
-              <p className="text-black font-semibold text-center sm:text-left">Venue: {event.venue}</p>
-            </div>
+         {/* Event Details */}      
+              <div className="flex-1 text-left">
+              <h2 className="text-2xl font-bold text-white text-center sm:text-left">{event.ename}</h2>
+              </div>
+              <div className="flex-1 text-left sm:ml-4 ml-2">
+              <p className="text-black font-semibold text-center sm:text-left">📅 Date: {format(new Date(event.date), 'dd MMMM yyyy')}</p>
+              </div>
+              <div className="flex-1 text-left sm:ml-4 ml-2">
+              <p className="text-black font-semibold text-center sm:text-left">{event.isTeamHackathon === true ? "📍 Venue" : "💻 Platform"}: {event.venue || "N/A"}</p>
+              </div>
+              <div className="flex justify-center sm:justify-end w-full sm:w-auto">
+              <button
+        className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold w-full sm:w-auto cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110"
+        onClick={() => handleGenerateReport(event._id, event.ename)} >
+        Generate Report
+        </button>
+      </div>
+
             </div>
       ))}
       </div>
        ) : (
-        <p className="text-black text-center" data-aos="fade-up">No participated events.</p>
+        <p className="text-black text-center text-3xl" data-aos="fade-up">No participated events.</p>
       )}
       </section>
 </div>
