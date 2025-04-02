@@ -263,11 +263,15 @@ function Shome() {
             className="bg-gradient-to-r from-orange-400 to-rose-600 rounded-lg shadow-lg p-4 w-4/5  sm:w-3/4 lg:w-[85%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
             data-aos="fade-up">
             {/* Event Details */}
-            <div className="flex flex-col sm:flex-row sm:items-center w-full justify-between space-y-2 sm:space-y-0 px-4">
+            <div className="flex-1 text-left">
               <h3 className="text-xl font-bold text-white text-center sm:text-left">{event.hackathonId.ename}</h3>
+              </div>
+              <div className="flex-1 text-left sm:ml-4 ml-2">
               <p className="text-black font-semibold text-center sm:text-left">Date: {formatDate(event.hackathonId.date)}</p>
+              </div>
+              <div className="flex-1 text-left sm:ml-4 ml-2">
               <p className="text-black font-semibold text-center sm:text-left">Venue: {event.hackathonId.venue}</p>
-            </div>
+              </div>            
 
             {/* Details Button (Responsive) */}
             <div className="flex justify-center sm:justify-end w-full sm:w-auto">
