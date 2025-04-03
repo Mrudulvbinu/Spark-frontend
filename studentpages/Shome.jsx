@@ -134,7 +134,7 @@ function Shome() {
       <Navbar />
 
       <div className="flex flex-col md:flex-row items-center justify-between px-8 md:px-16 lg:px-10 py-2 bg-white shadow-lg">
-      <div className="md:w-1/2 text-left mt-[-20px] md:mt-[-100px] pl-6 md:pl-12 lg:pl-16" data-aos="fade-right">
+      <div className="md:w-1/2 text-left mt-[-5px] md:mt-[-100px] pl-6 md:pl-12 lg:pl-16" data-aos="fade-right">
 
       <img 
         src="/sparkv20.svg" 
