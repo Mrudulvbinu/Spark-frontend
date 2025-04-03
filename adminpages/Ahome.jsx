@@ -5,12 +5,57 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { FiUsers, FiLogOut, FiMenu, FiX, FiHome, FiCalendar, FiUser, FiUserCheck } from "react-icons/fi";
 
+
+const formatDate = (dateString) => {
+  const options = { day: 'numeric', month: 'long', year: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+};
+
+// EventCard Component (defined outside main component)
+const EventCard = ({ hackathon }) => {
+  const navigate = useNavigate();
+  
+  return (
+    <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+      <div className="p-4">
+        <h3 className="text-lg font-bold bg-gradient-to-r from-rose-600 to-orange-400 bg-clip-text text-transparent">
+          {hackathon.name}
+        </h3>
+        <div className="mt-2 text-sm text-gray-600">
+          <p className="flex items-center">
+            <FiCalendar className="mr-2" />
+            Event Date: {formatDate(hackathon.date)}
+          </p>
+          <p className="flex items-center mt-1">
+            <FiUserCheck className="mr-2" />
+            {hackathon.organizer?.name || 'Unknown Organizer'}
+          </p>
+        </div>
+        <button
+          onClick={() => navigate(`/event-details/${hackathon._id}`)}
+          className="mt-4 w-full py-2 bg-gradient-to-r from-rose-500 to-orange-400 text-white rounded-md hover:from-rose-600 hover:to-orange-500 transition-colors"
+        >
+          View Details
+        </button>
+      </div>
+    </div>
+  );
+};
+
 function Ahome() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard");
   const [students, setStudents] = useState([]);
   const [organizers, setOrganizers] = useState([]);
-  const [stats, setStats] = useState({ totalStudents: 0, totalOrganizers: 0, activeEvents: 0 });
+  const [stats, setStats] = useState({ 
+    totalStudents: 0, 
+    totalOrganizers: 0, 
+    upcomingCount: 0,
+    conductedCount: 0 
+  });
+  const [hackathons, setHackathons] = useState([]);
+  const [upcomingHackathons, setUpcomingHackathons] = useState([]);
+  const [conductedHackathons, setConductedHackathons] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,8 +73,22 @@ function Ahome() {
           setStudents(studentsRes.data);
           setOrganizers(organizersRes.data);
         } else if (activeTab === "dashboard") {
-          const statsRes = await axiosInstance.get("/admin/stats");
-          setStats(statsRes.data);
+          const [statsRes, eventsRes] = await Promise.all([
+            axiosInstance.get("/user/user-counts"),
+            axiosInstance.get("/user/event-counts")
+          ]);
+          setStats({
+            totalStudents: statsRes.data.studentCount,
+            totalOrganizers: statsRes.data.organizerCount,
+            upcomingCount: eventsRes.data.upcomingCount,
+            conductedCount: eventsRes.data.conductedCount
+          });
+        } else if (activeTab === "events") {
+          const hackathonsRes = await axiosInstance.get("/user/hackathons");
+          const allHackathons = hackathonsRes.data.hackathons;
+          // Filter based on dynamic status
+          setUpcomingHackathons(allHackathons.filter(h => h.status === 'upcoming'));
+          setConductedHackathons(allHackathons.filter(h => h.status === 'conducted'));
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -75,10 +134,9 @@ function Ahome() {
           
           <button
             onClick={() => setActiveTab("users")}
-            className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${activeTab === "users" ? 'bg-rose-100 text-rose-600' : 'hover:bg-gray-100'}`}
-          >
+            className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${activeTab === "users" ? 'bg-rose-100 text-rose-600' : 'hover:bg-gray-100'}`}>
             <FiUsers className="flex-shrink-0" />
-            <span>User Management</span>
+            <span>Users</span>
           </button>
           
           <button
@@ -124,73 +182,75 @@ function Ahome() {
           </div>
         </header>
 
-       {/* Content Area */}
-<div className="p-2 md:p-4">
-  {activeTab === "dashboard" && (
-    <div data-aos="fade-up">
-      <h2 className="text-xl font-bold mb-2 text-gray-800">Admin Dashboard</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500">Total Students</p>
-              <h3 className="text-2xl font-bold mt-1">{stats.totalStudents}</h3>
+        {/* Content Area */}
+        <div className="p-2 md:p-4">
+          {activeTab === "dashboard" && (
+            <div data-aos="fade-up">
+              <h2 className="text-xl font-bold mb-2 text-gray-800">Admin Dashboard</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
+                {/* Students Card */}
+                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500">Total Students</p>
+                      <h3 className="text-2xl font-bold mt-1">{stats.totalStudents}</h3>
+                    </div>
+                    <div className="p-2 rounded-full bg-rose-50 text-rose-600">
+                      <FiUser size={20} />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Organizers Card */}
+                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500">Total Organizers</p>
+                      <h3 className="text-2xl font-bold mt-1">{stats.totalOrganizers}</h3>
+                    </div>
+                    <div className="p-2 rounded-full bg-orange-50 text-orange-600">
+                      <FiUserCheck size={20} />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Events Card (Updated) */}
+                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500">Upcoming Events</p>
+                      <h3 className="text-2xl font-bold mt-1">{stats.upcomingCount}</h3>
+                    </div>
+                    <div className="p-2 rounded-full bg-blue-50 text-blue-600">
+                      <FiCalendar size={20} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Welcome Section */}
+              <div className="bg-white p-2 rounded-lg shadow-sm border border-gray-100 mt-0 mb-0">
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="w-full md:w-1/2 text-left pb-0 ml-6" data-aos="fade-right">
+                    <h1 className="text-6xl font-bold bg-gradient-to-r from-rose-600 to-orange-400 bg-clip-text text-transparent">
+                      Welcome to the Admin Panel
+                    </h1>
+                    <p className="text-xl text-gray-700 mt-2">
+                      Manage student users & organizers, monitor activities, and oversee events effortlessly.
+                    </p>
+                  </div>
+                  <div className="w-full md:w-1/2 flex justify-center" data-aos="fade-left">
+                    <img 
+                      src="/assets/admins.png" 
+                      alt="Admin Panel" 
+                      className="max-w-xs w-full h-auto"/>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="p-2 rounded-full bg-rose-50 text-rose-600">
-              <FiUser size={20} />
-            </div>
-          </div>
-        </div>
-        
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500">Total Organizers</p>
-              <h3 className="text-2xl font-bold mt-1">{stats.totalOrganizers}</h3>
-            </div>
-            <div className="p-2 rounded-full bg-orange-50 text-orange-600">
-              <FiUserCheck size={20} />
-            </div>
-          </div>
-        </div>
-        
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500">Active Events</p>
-              <h3 className="text-2xl font-bold mt-1">{stats.activeEvents}</h3>
-            </div>
-            <div className="p-2 rounded-full bg-blue-50 text-blue-600">
-              <FiCalendar size={20} />
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Welcome Section - Compact */}
-      <div className="bg-white p-2 rounded-lg shadow-sm border border-gray-100 mt-0 mb-0">
-        <div className="flex flex-col md:flex-row items-center">
-          {/* Left Section - Welcome Text */}
-          <div className="w-full md:w-1/2 text-left pb-0 ml-6" data-aos="fade-right">
-            <h1 className="text-6xl font-bold bg-gradient-to-r from-rose-600 to-orange-400 bg-clip-text text-transparent">
-              Welcome to the Admin Panel
-            </h1>
-            <p className="text-xl text-gray-700 mt-2">
-              Manage student users & organizers, monitor activities, and oversee events effortlessly.
-            </p>
-          </div>
-          {/* Right Section - Image */}
-          <div className="w-full md:w-1/2 flex justify-center" data-aos="fade-left">
-            <img 
-              src="/assets/admins.png" 
-              alt="Admin Panel" 
-              className="max-w-xs w-full h-auto"/>
-          </div>
-        </div>
-      </div>
-    </div>
-  )}
+          )}
+
           {activeTab === "users" && (
             <div data-aos="fade-up">
               <div className="flex justify-between items-center mb-2">
@@ -235,6 +295,7 @@ function Ahome() {
                     )}
                   </div>
                 </div>
+                
                 {/* Organizers Card */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                   <div className="bg-gradient-to-r from-orange-400 to-rose-600 p-4 text-white">
@@ -275,11 +336,49 @@ function Ahome() {
               </div>
             </div>
           )}
+
           {activeTab === "events" && (
-            <div className="text-center py-16 text-gray-500" data-aos="fade-up">
-              <FiCalendar size={48} className="mx-auto mb-4 text-gray-300" />
-              <h3 className="text-xl font-medium">Events Management</h3>
-              <p className="mt-2">Coming soon</p>
+            <div data-aos="fade-up" className="p-4">
+              
+              {/* Upcoming Events Section */}
+              <div className="mb-8">
+                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                  <span className="bg-gradient-to-r from-rose-600 to-orange-600 bg-clip-text text-transparent">
+                    Upcoming Events ({upcomingHackathons.length})
+                  </span>
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {upcomingHackathons.length > 0 ? (
+                    upcomingHackathons.map((hackathon) => (
+                      <EventCard key={hackathon._id} hackathon={hackathon} />
+                    ))
+                  ) : (
+                    <div className="col-span-full text-center py-8 text-gray-500">
+                      No upcoming events scheduled
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              {/* Conducted Events Section */}
+              <div>
+                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                  <span className="bg-gradient-to-r from-rose-600 to-orange-600 bg-clip-text text-transparent">
+                    Past Events ({conductedHackathons.length})
+                  </span>
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {conductedHackathons.length > 0 ? (
+                    conductedHackathons.map((hackathon) => (
+                      <EventCard key={hackathon._id} hackathon={hackathon} />
+                    ))
+                  ) : (
+                    <div className="col-span-full text-center py-8 text-gray-500">
+                      No past events found
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           )}
         </div>
