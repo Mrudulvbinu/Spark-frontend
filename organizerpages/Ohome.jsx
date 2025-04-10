@@ -118,7 +118,7 @@ function Ohome() {
         <Link to="/revappro" className="w-full flex justify-center">
           <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8
            flex flex-col items-center cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105">
-            <h2 className="text-2xl font-bold">Review and Approve Proposals</h2>
+            <h2 className="text-4xl font-bold">Review and Approve Proposals</h2>
           </div>
         </Link>
 
@@ -126,7 +126,7 @@ function Ohome() {
         <Link to="/approreg" className="w-full flex justify-center">
           <div className="max-w-lg bg-gradient-to-r from-rose-600 to-orange-400 text-white shadow-lg rounded-lg p-8
            flex flex-col items-center cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105">
-            <h2 className="text-2xl font-bold">Approved and Rejected Proposals</h2>
+            <h2 className="text-4xl font-bold">Approved and Rejected Proposals</h2>
           </div>
         </Link>
       </div>

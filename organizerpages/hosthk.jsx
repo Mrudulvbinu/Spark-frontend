@@ -85,10 +85,10 @@ const Hosthk = () => {
             <Headerbar />
             <Navbar />
 
-            <h2 className="text-5xl font-bold text-center text-white mt-15 mb-10">Host Hackathon</h2>
+            <h2 className="text-5xl font-bold text-center bg-gradient-to-r from-orange-400 to-rose-600 bg-clip-text text-transparent animate-pulse mt-2 mb-0">Host Hackathon</h2>
 
-            <form onSubmit={handleSubmit} className="transform scale-85 bg-white shadow-lg rounded-lg p-8 space-y-6 max-w-3xl mx-auto">
-                <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Register Hackathon</h1>
+            <form onSubmit={handleSubmit} className="transform scale-85 bg-white shadow-xl rounded-lg p-8 space-y-6 max-w-3xl mx-auto">
+                <h1 className="text-3xl font-semibold text-center text-black mb-6">Register Hackathon</h1>
 
                 <div className="flex items-center space-x-4">
     <label className="w-1/3 font-bold text-lg text-gray-700 text-right">Type of Hackathon:</label>
@@ -131,24 +131,21 @@ const Hosthk = () => {
                         <label className="w-1/3 font-bold text-lg text-gray-700 text-right">
                             Duration of Hackathon:
                         </label>
-                        <select
-                            id="durofhk"
-                            name="durofhk"
-                            value={formData.durofhk}
-                            onChange={handleChange}
-                            className="w-2/3 p-3 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-                            required
-                        >
-                            <option value="">Select Duration</option>
-                            <option value="24 Hour">24 Hour</option>
-                            <option value="12 Hour">12 Hour</option>
-                            <option value="1 Hour">1 Hour</option>
-                        </select>
+                        <input
+    type="text"
+    id="durofhk"
+    name="durofhk"
+    value={formData.durofhk}
+    onChange={handleChange}
+    placeholder="Enter Duration (e.g., 24 Hour, 12 Hour, 1 Hour)"
+    className="w-2/3 p-3 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+    required
+/>
                     </div>
 
 
                     <div className="flex justify-center">
-                    <button type="submit" className="w-1/2 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+                    <button type="submit" className="w-1/2 bg-gradient-to-r from-orange-400 to-rose-600  text-white py-2 px-4 rounded-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">
                         Host
                     </button>
                 </div>

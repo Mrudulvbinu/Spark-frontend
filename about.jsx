@@ -42,7 +42,7 @@ const About = () => {
         <section className="mb-16 text-center">
           <h2 className="text-6xl font-semibold bg-gradient-to-r from-rose-600 to-orange-400 bg-clip-text text-transparent">What We Do</h2>
           <p className="mt-6 text-lg text-black max-w-4xl mx-auto">
-            Spark Venture is an innovative platform for managing hackathons. Whether you're a student eager to participate or an organizer looking to host an event, we streamline the entire experience. From registration to project submissions, we ensure that every step is simple and efficient.
+            Sparkventure is an innovative platform for managing hackathons. Whether you're a student eager to participate or an organizer looking to host an event, we streamline the entire experience. From registration to project submissions, we ensure that every step is simple and efficient.
           </p>
         </section>
       </div>

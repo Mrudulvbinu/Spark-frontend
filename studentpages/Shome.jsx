@@ -171,15 +171,16 @@ function Shome() {
         <div className="flex flex-wrap justify-center gap-6 mt-10">
           {teamHackathons.length > 0 ? (
             teamHackathons.map((event) => (
-              <div key={event._id} className="bg-gradient-to-r from-rose-600 to-orange-400 text-white p-6 rounded-lg
-               shadow-lg max-w-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105" data-aos="fade-up">
+              <div key={event._id} className="bg-gradient-to-r from-rose-600 to-orange-400 text-white p-6 rounded-lg shadow-lg max-w-md cursor-pointer hover:shadow-xl transition-all duration-700 ease-in-out hover:scale-[1.02] transform-gpu" data-aos="fade-up">
                 <h3 className="text-2xl font-bold">{event.ename}</h3>
                 <p className="text-lg">📅 Date: {event.date}</p>
                 <p className="text-lg">📍 Venue: {event.venue}</p>
                 <p className="text-lg">🏆 Prize: {event.prize}</p>
-                <div className="flex justify-between mt-3">
-                  <button onClick={() => handleRegister(event)} className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">Register</button>
-                  <button onClick={() => handleDetailsClick(event)} className="bg-white text-black px-4 py-2 rounded-lg font-bold cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">Details</button>
+                <div className="flex justify-between mt-3 gap-8">
+                  <button onClick={() => handleRegister(event)} className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold cursor-pointer
+                   hover:shadow-xl transition-transform duration-300 hover:scale-110 min-w-[120px]">Register</button>
+                  <button onClick={() => handleDetailsClick(event)} className="bg-white text-black px-4 py-2 rounded-lg font-bold cursor-pointer 
+                  hover:shadow-xl transition-transform duration-300 hover:scale-110 min-w-[120px]">Details</button>
                 </div>
               </div>
             ))
@@ -193,14 +194,17 @@ function Shome() {
         <div className="flex flex-wrap justify-center gap-6 mt-10">
           {soloHackathons.length > 0 ? (
             soloHackathons.map((event) => (
-              <div key={event._id} className="bg-gradient-to-r from-orange-400 to-rose-600 text-white p-6 rounded-lg shadow-lg max-w-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105" data-aos="fade-up">
+              <div key={event._id} className="bg-gradient-to-r from-orange-400 to-rose-600 text-white p-6 rounded-lg shadow-lg max-w-md cursor-pointer
+               hover:shadow-xl transition-all duration-700 ease-in-out hover:scale-[1.02] transform-gpu" data-aos="fade-up">
                 <h3 className="text-2xl font-bold">{event.ename}</h3>
                 <p className="text-lg">📅 Date: {event.date}</p>
                 <p className="text-lg">💻 Platform: {event.venue}</p>
                 <p className="text-lg">🏆 Prize: {event.prize}</p>
-                <div className="flex justify-between mt-3">
-                  <button onClick={() => handleRegister(event)} className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">Register</button>
-                  <button onClick={() => handleDetailsClick(event)} className="bg-white text-black px-4 py-2 rounded-lg font-bold cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">Details</button>
+                <div className="flex justify-between mt-3 gap-8">
+                  <button onClick={() => handleRegister(event)} className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold cursor-pointer
+                   hover:shadow-xl transition-transform duration-300 hover:scale-110 min-w-[120px]">Register</button>
+                  <button onClick={() => handleDetailsClick(event)} className="bg-white text-black px-4 py-2 rounded-lg font-bold cursor-pointer
+                   hover:shadow-xl transition-transform duration-300 hover:scale-110 min-w-[120px]">Details</button>
                 </div>
               </div>
             ))

@@ -27,12 +27,12 @@ const Footer = () => {
       <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
         <img src={fb} className="w-8 h-8" />
       </a>
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.instagram.com/spark_venture?igsh=Zmp5N3BteWo0MWEy" target="_blank" rel="noopener noreferrer">
         <img src={insta} className="w-8 h-8" />
       </a>
-      <a href="https://gmail.com" target="_blank">
-        <img src={mail} className="w-8 h-8" />
-      </a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sparkventure@cognitry.io" target="_blank" rel="noopener noreferrer">
+  <img src={mail} alt="Email us" className="w-8 h-8" />
+</a>
     </div>
   </div>
 

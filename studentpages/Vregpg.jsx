@@ -4,11 +4,30 @@ import { useNavigate, useParams } from "react-router-dom";
 import vid1 from "/assets/vid1.mp4";
 import logo from "/assets/sparkventure.svg";
 import Header from "/components/header.jsx";
+import homeIcon from "/assets/homebtn.svg";
+
 
 const Vregpg = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+useEffect(() => {
+    const container = document.getElementById("container");
+    if (container) {
+      container.classList.add("opacity-0", "translate-y-20");
+      setTimeout(() => {
+        container.classList.remove("opacity-0", "translate-y-20");
+        container.classList.add(
+          "transition-all",
+          "duration-1000",
+          "opacity-100",
+          "translate-y-0"
+        );
+      }, 700);
+    }
+  }, []);
+
 
   const navigate = useNavigate();
   const { hackathonId } = useParams();
@@ -48,16 +67,34 @@ const Vregpg = () => {
       setErrorMessage(error.response?.data?.message || 'Registration failed.');
     }
   };
-  return (
-    <div className="relative flex flex-col min-h-screen">
-      <video className="fixed top-0 left-0 w-full h-full object-cover z-0" autoPlay loop muted playsInline>
-        <source src={vid1} type="video/mp4" />
-      </video>
-
-      <div className="w-full transform scale-80 relative z-10 container mx-auto p-1">
-        <Header />
-        <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-8 space-y-6 max-w-3xl mx-auto">
-          <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Register for Virtual Hackathon</h1>
+   return (
+     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: `url(${vid1})` }}>
+         <video className="absolute top-0 left-0 w-full h-full object-cover z-0 min-w-full min-h-full" autoPlay loop muted playsInline style={{
+      transform: 'scale(1.0)',
+      objectPosition: 'center center'
+    }}>
+           <source src={vid1} type="video/mp4" />
+           Your browser does not support the video tag.
+         </video>
+        <button 
+          onClick={() => {
+            console.log(" Back button clicked!");
+            window.history.back();
+          }}
+          className="absolute top-2 left-2 bg-white border-1 border-black rounded-lg p-2 shadow-md hover:bg-gray-200 transition-all z-50"
+        >
+          <img src={homeIcon} alt="Home" className="w-8 h-8" />
+        </button>
+  
+        <div className="relative z-10 flex flex-col items-center justify-center w-full text-center px-4 py-6 sm:px-6 sm:py-8">
+           <div className="w-full">
+                  <Header />
+                </div>
+  
+                <div id="container" className="relative z-20 w-full max-w-lg md:max-w-xl px-10 py-10 bg-white rounded-lg shadow-xl transition-all"> 
+          <form onSubmit={handleSubmit} className="space-y-2">
+            <h1 className="text-2xl font-semibold text-center mb-8 bg-gradient-to-r from-rose-600 to-orange-400
+      bg-clip-text text-transparent">Register for Virtual Hackathon</h1>
 
           {[["Name", "name"], ["Date of Birth", "datebirth"], ["Email", "email"], ["Phone Number", "phone"]].map(([label, id]) => (
             <div key={id} className="flex items-center space-x-4">
@@ -105,9 +142,10 @@ const Vregpg = () => {
 
           {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
           <div className="text-center">
-            <button type="submit" className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-xl hover:bg-blue-800">Register</button>
+          <button type="submit" className="w-full bg-gradient-to-r from-orange-400 to-rose-600  text-white py-3 px-6 rounded-lg font-bold text-lg cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-105">Register</button>
           </div>
         </form>
+        </div>
       </div>
 
       <img src={logo} alt="Logo" className="absolute bottom-5 right-5 w-45 h-auto" />
