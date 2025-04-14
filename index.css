@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@keyframes fadeZoomOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@font-face {
+  font-family: 'Aristotelica Display';
+  src: url('/aristotelica.woff') format('woff'),
+         url('/aristotelica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.animate-fade-zoom {
+  animation: fadeZoomIn 0.3s ease forwards;
+}
+
+.animate-fade-zoom.out {
+  animation: fadeZoomOut 0.3s ease forwards;
+}
+
+@tailwind utilities;
+
+@layer utilities {
+  .transform-gpu {
+    transform: translate3d(0, 0, 0);
+  }
+}
