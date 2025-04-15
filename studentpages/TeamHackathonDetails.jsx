@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axiosInstance from '/axiosinstance';
-import { Container, Typography, Grid, Paper, Button, Chip, Divider, Box, IconButton, Stack } from '@mui/material';
+import { Container, Typography, Grid, Paper, Button, Chip, Divider, Box, IconButton, Stack, Avatar } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import PeopleIcon from '@mui/icons-material/People';
+import banner1 from '/assets/banner1.png';
+import banner2 from '/assets/banner2.png';
+import logo1 from '/assets/sparkventure.svg';
 
 export default function TeamHackathonDetails() {
   const { hackathonId } = useParams();
@@ -11,17 +15,17 @@ export default function TeamHackathonDetails() {
   const [loading, setLoading] = useState(true);
   const [isRegistered, setIsRegistered] = useState(false);
 
+   const bannerImages = [banner1, banner2];
+    const partnerLogos = [logo1];
 
   const fetchEvent = async () => {
     try {
-      // First get all hackathons
       const res = await axiosInstance.get('/hackathons');
-      // Then find the one with matching ID
       const foundEvent = res.data.find(h => h._id === hackathonId);
       if (foundEvent) {
         setEvent(foundEvent);
       } else {
-        setEvent(null); // Will show "not found"
+        setEvent(null); 
       }
     } catch (error) {
       console.error('Error fetching event:', error);
@@ -44,7 +48,6 @@ export default function TeamHackathonDetails() {
       const res = await axiosInstance.get(
         `/registeredhackathon/check/${hackathonId}`
       ).catch(error => {
-        // Specifically handle 401 without redirecting
         if (error.response?.status === 401) {
           console.log('Not registered (401 response)');
           return { data: { isRegistered: false } };
@@ -55,12 +58,11 @@ export default function TeamHackathonDetails() {
       setIsRegistered(res.data.isRegistered);
     } catch (error) {
       console.error('Registration check failed:', error);
-      setIsRegistered(false); // Default to not registered on error
+      setIsRegistered(false); 
     }
   };
 
   useEffect(() => {
-    // Check if we have required auth data
     const token = localStorage.getItem('token');
     const studentId = localStorage.getItem('studentId');
     
@@ -87,17 +89,75 @@ export default function TeamHackathonDetails() {
     </Container>
   );
 
+
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
-      <Box mb={4}>
-        <IconButton onClick={() => navigate(-1)} sx={{ mb: 2 }}>
+    <Container maxWidth="lg" sx={{ py: 2 }}>
+      {/* Compact Header Section */}
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: 'column',
+        alignItems: 'center',
+        mb: 4
+      }}>
+         {/* Back Button */}
+         <IconButton 
+          onClick={() => navigate(-1)} 
+          sx={{ 
+            alignSelf: 'flex-start',
+            mb: 2
+          }}
+        >
           <ArrowBackIcon />
         </IconButton>
+
+        {/* Small Banner Images - side by side */}
+<Box sx={{ 
+  display: 'flex',
+  justifyContent: 'center',
+  gap: 2,
+  mb: 2,
+  width: '100%',
+  maxHeight: '130px',
+  overflow: 'hidden'
+}}>
+  {bannerImages.map((img, index) => (
+    <Box 
+      key={index}
+      component="img"
+      src={img}
+      alt={`Banner ${index + 1}`}
+      sx={{
+        height: index === 0 ? '120px' : '60px', 
+        width: 'auto',
+        objectFit: 'contain',
+        mt: index === 1 ? 4 : 0
+      }}
+    />
+  ))}
+</Box>
+
+        <Avatar
+          src={logo1}
+          alt="SparkVenture Logo"
+          variant="rounded"
+          sx={{ 
+            width: 800, 
+            height: 110,
+            objectFit: 'contain',
+            mb: 2
+          }}
+        />
+
+       
+      </Box>
         
-        <Typography variant="h3" component="h1" gutterBottom>
-          {event.ename}
-        </Typography>
-        
+         {/* Event Title */}
+      <Typography variant="h3" component="h1" gutterBottom align="center">
+        {event.ename}
+      </Typography>
+      
+      {/* Hackathon Type Chip */}
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
         <Chip 
   label="Team Hackathon" 
   sx={{ 
@@ -106,9 +166,11 @@ export default function TeamHackathonDetails() {
     color: 'white',
     fontWeight: 'bold',
   }}
-/>
+  icon={<PeopleIcon style={{ color: 'white' }} />}
+  />
       </Box>
 
+      {/* Hackathon Details Card*/}
       <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
@@ -132,6 +194,40 @@ export default function TeamHackathonDetails() {
           </Grid>
         </Grid>
       </Paper>
+
+
+ {/* Additional Information */}
+ <Box sx={{ justifyContent: 'center',mb: 4 }}
+      >
+    <h3 className="text-3xl font-bold text-rose-600 mt-2 animate-bounce	">Powering Infinite Potential</h3>
+    <Divider sx={{ mb: 3 }}/>
+        <Typography paragraph>
+        <p><span className="font-bold text-rose-600">‘Sparkventure 2.0</span> - Powering Infinite Potential’ is a student project/start-up funding initiative
+instituted by <span className="font-bold text-rose-600">Core Cognitics Limited</span> and <span className="font-bold text-rose-600">Cognitry</span> conducted in association with the Department of
+Computer Science and Engineering, IIC and IEEE Computer Society Chapter,<span className="font-bold text-rose-600">Toc H Institute of
+Science and Technology</span>, Arakkunnam.</p>
+We welcome  <span className="font-bold text-rose-600">project proposals from Engineering & Computer Science students showcasing unique
+projects or startup ideas.</span> Exceptional proposals will stand a chance to receive grants to transform
+their ideas into products. The challenge will run as a 6-month contest cycle.
+        </Typography>
+        <Typography paragraph>
+<p>< h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-rose-600 to-orange-400
+    bg-clip-text text-transparent">Objectives :</h1>
+Empowering creative student projects through financial grants to evolve them into tangible products,
+thereby cultivating a dynamic and lively environment that stimulates and nurtures a thriving startup
+ecosystem within the country. The initiative specifically focuses on startup ideas, aiming to ignite
+innovation among students and serve as a catalyst for their entrepreneurial endeavours.</p>
+        </Typography>
+
+        <Typography paragraph>
+        <p>< h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-rose-600 to-orange-400
+    bg-clip-text text-transparent">Domain:</h1>Empowering creative student projects through financial grants to evolve them into tangible products,
+thereby cultivating a dynamic and lively environment that stimulates and nurtures a thriving startup
+ecosystem within the country. The initiative specifically focuses on startup ideas, aiming to ignite
+innovation among students and serve as a catalyst for their entrepreneurial endeavours.</p>
+        </Typography>
+      </Box>
+
 
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
   {isRegistered ? (
