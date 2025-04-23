@@ -91,7 +91,7 @@ export default function TeamHackathonDetails() {
 
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2 }}>
+    <Container maxWidth="lg" sx={{ py: 1 }}>
       {/* Compact Header Section */}
       <Box sx={{ 
         display: 'flex', 
@@ -117,7 +117,7 @@ export default function TeamHackathonDetails() {
   gap: 2,
   mb: 2,
   width: '100%',
-  maxHeight: '130px',
+  maxHeight: '110px',
   overflow: 'hidden'
 }}>
   {bannerImages.map((img, index) => (
@@ -127,7 +127,7 @@ export default function TeamHackathonDetails() {
       src={img}
       alt={`Banner ${index + 1}`}
       sx={{
-        height: index === 0 ? '120px' : '60px', 
+        height: index === 0 ? '80px' : '40px', 
         width: 'auto',
         objectFit: 'contain',
         mt: index === 1 ? 4 : 0
@@ -141,10 +141,10 @@ export default function TeamHackathonDetails() {
           alt="SparkVenture Logo"
           variant="rounded"
           sx={{ 
-            width: 800, 
-            height: 110,
+            width: 600, 
+            height: 100,
             objectFit: 'contain',
-            mb: 2
+            mb: 1
           }}
         />
 
