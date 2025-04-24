@@ -121,6 +121,18 @@ const Regist = () => {
             </div>
 
             <div className="space-x-4 flex items-center">
+              <label className="w-1/3 text-lg font-semibold text-gray-700" htmlFor="name">Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                value={name1} 
+                onChange={(e) => setName(e.target.value)} 
+                className="w-2/3 p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                required 
+              />
+            </div>
+
+            <div className="space-x-4 flex items-center">
               <label className="w-1/3 text-lg font-semibold text-gray-700" htmlFor="email">Email</label>
               <input 
                 type="email" 
