@@ -14,6 +14,8 @@ export default function VirtualHackathonDetails() {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isRegistered, setIsRegistered] = useState(false);
+  const searchParams = new URLSearchParams(window.location.search);
+  const urlRegistered = searchParams.get('registered') === 'true';
 
   const bannerImages = [banner1, banner2];
   const partnerLogos = [logo1];
@@ -73,9 +75,14 @@ export default function VirtualHackathonDetails() {
     }
 
     fetchEvent();
-    checkRegistration();
+    if (urlRegistered) {
+      setIsRegistered(true);
+    } else {
+      checkRegistration();
+    }
   }, [hackathonId]);
 
+  
   if (loading) return <div>Loading...</div>;
   if (!event) return (
     <Container maxWidth="md" sx={{ py: 4, textAlign: 'center' }}>
@@ -92,7 +99,7 @@ export default function VirtualHackathonDetails() {
   
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2 }}>
+    <Container maxWidth="lg" sx={{ py: 1 }}>
       {/* Compact Header Section */}
       <Box sx={{ 
         display: 'flex', 
@@ -117,8 +124,8 @@ export default function VirtualHackathonDetails() {
   justifyContent: 'center',
   gap: 2,
   mb: 2,
-  width: '100%',
-  maxHeight: '130px',
+  width: '90%',
+  maxHeight: '110px',
   overflow: 'hidden'
 }}>
   {bannerImages.map((img, index) => (
@@ -128,7 +135,7 @@ export default function VirtualHackathonDetails() {
       src={img}
       alt={`Banner ${index + 1}`}
       sx={{
-        height: index === 0 ? '120px' : '60px', 
+        height: index === 0 ? '80px' : '40px', 
         width: 'auto',
         objectFit: 'contain',
         mt: index === 1 ? 4 : 0
@@ -142,10 +149,10 @@ export default function VirtualHackathonDetails() {
           alt="SparkVenture Logo"
           variant="rounded"
           sx={{ 
-            width: 800, 
-            height: 110,
+            width: 600, 
+            height: 100,
             objectFit: 'contain',
-            mb: 2
+            mb: 1
           }}
         />
 

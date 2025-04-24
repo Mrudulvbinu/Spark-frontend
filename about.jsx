@@ -66,7 +66,7 @@ const About = () => {
 
           <div className="flex justify-center items-center mt-8">
             <div className="relative text-center">
-              <img src="/assets/lead.jpg" alt="Mrudul V Binu" className="w-40 h-40 mx-auto rounded-full shadow-lg" />
+              <img src="/assets/profile.jpg" alt="Profile" className="w-40 h-40 mx-auto rounded-full shadow-lg" />
               <p className="mt-6 font-semibold text-xl text-black">Mrudul V Binu</p>
               <p className="text-1xl font-semibold bg-rose-600 bg-clip-text text-transparent">
                 Project Lead | Developer | Designer

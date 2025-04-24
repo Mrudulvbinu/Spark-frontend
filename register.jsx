@@ -7,7 +7,7 @@ import axiosInstance from "/axiosinstance";
 import Header from "/components/header.jsx";
 
 const Regist = () => {
-  const [name1, setName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -66,21 +66,17 @@ const Regist = () => {
       return;
     }
 
-    const userData = {
-      name: name1,
-      email: email,
-      username: username,
-      password: password,
-      userType: userType,
-      address: address,
-    };
-
+    const userData = userType === 'organizer' 
+    ? { name: name, email, username, password, address, userType}
+    : { name: name, email, username, password };
+  
     try {
       const endpoint = userType === "student" ? "/user/register/student" : "/user/register/organizer";
       const response = await axiosInstance.post(endpoint, userData);
       setSuccessMessage(response.data.message);
       setTimeout(() => navigate("/"), 2000);
     } catch (error) {
+      console.log('Full error response:', error.response);
       setErrorMessage(error.response?.data?.error || "Something went wrong");
     }
   };
@@ -125,7 +121,7 @@ const Regist = () => {
               <input 
                 type="text" 
                 id="name" 
-                value={name1} 
+                value={name} 
                 onChange={(e) => setName(e.target.value)} 
                 className="w-2/3 p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
                 required 

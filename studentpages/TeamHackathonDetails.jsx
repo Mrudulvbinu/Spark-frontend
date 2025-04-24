@@ -14,6 +14,8 @@ export default function TeamHackathonDetails() {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isRegistered, setIsRegistered] = useState(false);
+  const searchParams = new URLSearchParams(window.location.search);
+  const urlRegistered = searchParams.get('registered') === 'true';
 
    const bannerImages = [banner1, banner2];
     const partnerLogos = [logo1];
@@ -72,8 +74,13 @@ export default function TeamHackathonDetails() {
     }
   
     fetchEvent();
-    checkRegistration();
+    if (urlRegistered) {
+      setIsRegistered(true);
+    } else {
+      checkRegistration();
+    }
   }, [hackathonId]);
+  
 
   if (loading) return <div>Loading...</div>;
   if (!event) return (
@@ -116,7 +123,7 @@ export default function TeamHackathonDetails() {
   justifyContent: 'center',
   gap: 2,
   mb: 2,
-  width: '100%',
+  width: '90%',
   maxHeight: '110px',
   overflow: 'hidden'
 }}>
@@ -161,7 +168,6 @@ export default function TeamHackathonDetails() {
         <Chip 
   label="Team Hackathon" 
   sx={{ 
-    mb: 2,
     background: 'linear-gradient(to right, #FB923C, #E11D48)',
     color: 'white',
     fontWeight: 'bold',

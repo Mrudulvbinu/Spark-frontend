@@ -4,7 +4,7 @@ const axiosInstance = axios.create({
   baseURL: process.env.NODE_ENV === "development"
   ? "http://localhost:5000/api"  
   : "https://spark-backend-5v4v.onrender.com/api",
-withCredentials: true,
+      withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(

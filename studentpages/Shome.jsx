@@ -81,13 +81,15 @@ function Shome() {
     navigate(route);
   };
 
-  const handleDetailsClick = (event) => {
-    const route = event.typeofhk.includes('Team') 
-      ? `/team-hackathon/${event._id}`
-      : `/virtual-hackathon/${event._id}`;
+  const handleDetailsClick = (event, isRegisteredEvent = false) => {
+    const actualEvent = isRegisteredEvent ? event.hackathonId : event;
+    const isRegistered = isRegisteredEvent; // If it's from upcoming/participated, it's registered
+    const route = actualEvent.typeofhk.includes('Team') 
+      ? `/team-hackathon/${actualEvent._id}?registered=${isRegistered}`
+      : `/virtual-hackathon/${actualEvent._id}?registered=${isRegistered}`;
     navigate(route);
   };
-
+  
   const formatDate = (date) => new Date(date).toLocaleDateString();
 
   return (
@@ -263,35 +265,6 @@ function Shome() {
 
         <Footer />
       </div>
-
-   {/* Event Details Dialog */}
-   {showDetails && selectedEvent && (
-        <div className="fixed inset-0 z-50 flex justify-center items-center" onClick={handleCloseDialog}>
-          <div className="absolute inset-0 bg-red-50"></div>
-          <div className="absolute inset-0 bg-opacity-20"></div>
-          <div className="relative bg-white p-6 rounded-lg shadow-lg max-w-md w-full animate-fade-zoom z-10" onClick={(e) => e.stopPropagation()}>
-            <button onClick={handleCloseDialog} className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">✖</button>
-            <h2 className="text-3xl font-bold text-center mb-4">EVENT DETAILS</h2>
-            <p className="text-lg"><strong>Name:</strong> {selectedEvent.ename}</p>
-            <p className="text-lg"><strong>Date:</strong> {selectedEvent.date}</p>
-            <p className="text-lg"><strong>{selectedEvent.typeofhk === 'Team Hackathon (offline)' ? 'Venue' : 'Platform'}:</strong> {selectedEvent.venue}</p>
-            <p className="text-lg"><strong>Duration:</strong> {selectedEvent.durofhk}</p>
-            <p className="text-lg"><strong>Prize:</strong> {selectedEvent.prize}</p>
-            <p className="text-lg"><strong>Details:</strong> {selectedEvent.details}</p>
-            {selectedEvent.typeofhk === 'Team Hackathon (offline)' && (
-            <p className="text-lg"><strong>Maximum number of participants:</strong> {selectedEvent.maxTeamMembers}</p>)}
-      
-      {/* Conditionally Show Register Button */}
-      {!selectedEvent.isRegisteredEvent && (
-        <div className="flex justify-center mt-6">
-        <p className="text-lg"><strong>Last date of registration:</strong> {selectedEvent.regend}</p>
-        <button onClick={() => handleRegister(selectedEvent)} className="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-800">Register</button>
-        </div>
-      )}
-    </div>
-  </div>
-)}
-
     </section>
   );
 }
