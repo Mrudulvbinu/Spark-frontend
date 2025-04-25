@@ -141,20 +141,15 @@ const Hosthk = () => {
     className="w-2/3 p-3 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
     required
 />
-                    </div>
-
-
-                    <div className="flex justify-center">
-                    <button type="submit" className="w-1/2 bg-gradient-to-r from-orange-400 to-rose-600  text-white py-2 px-4 rounded-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">
-                        Host
-                    </button>
-                </div>
-
-            </form>
-
-            <Footer />
+</div>
+<div className="flex justify-center">
+<button type="submit" className="w-1/2 bg-gradient-to-r from-orange-400 to-rose-600  text-white py-2 px-4 rounded-md cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110">
+    Host
+</button>
+  </div>
+        </form>
+        <Footer />
         </div>
     );
 };
-
 export default Hosthk;

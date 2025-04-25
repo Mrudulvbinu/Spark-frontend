@@ -45,3 +45,19 @@
     transform: translate3d(0, 0, 0);
   }
 }
+
+/* Add to your CSS file */
+.proposal-card {
+  transition: all 0.3s ease;
+}
+
+.proposal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.status-badge {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

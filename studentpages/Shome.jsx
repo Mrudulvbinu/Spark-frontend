@@ -206,6 +206,18 @@ function Shome() {
             <p className="text-black font-semibold text-center sm:text-left">{event.hackathonId.isTeamHackathon === true ? "📍 Venue" : "💻 Platform"}: {event.hackathonId.venue || "N/A"}</p>
             </div>
 
+
+             {/* Status Badge */}
+      <div className="flex-1 font-bold text-center sm:text-left sm:ml-6 ml-2">
+        <span className={`px-6 py-4 rounded text-xs ${
+          event.status === 'approved' ? 'bg-green-100 text-green-600' :
+          event.status === 'rejected' ? 'bg-red-100 text-red-600' :
+          'bg-yellow-100 text-yellow-900'
+        }`}>
+          Proposal Status: {event.status || 'pending'}
+        </span>
+      </div>
+
             <div className="flex justify-center sm:justify-end w-full sm:w-auto">
               <button 
                 className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold w-full sm:w-auto cursor-pointer hover:shadow-xl transition-transform duration-300 hover:scale-110"
@@ -218,7 +230,7 @@ function Shome() {
         ))}
       </div>
     ) : (
-      <p className="text-black text-center text-xl" data-aos="fade-up">No upcoming events registered.</p>
+      <p className="text-black text-center text-xl" data-aos="fade-up">No upcoming registered events.</p>
     )}
   </section>
 
