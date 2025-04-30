@@ -23,6 +23,7 @@ import RegStud from './organizerpages/regstud.jsx';
 
 // Admin Pages
 import Ahome from './adminpages/Ahome.jsx';
+import Adminevents from './adminpages/Adminevents.jsx';
 
 // Other Pages
 import About from './about.jsx';
@@ -103,6 +104,7 @@ const App = () => {
 
           {/* Admin Routes */}
           <Route path="/ahome" element={<Ahome />} />
+          <Route path="/event-details/:eventId" element={<Adminevents />} />
 
           {/* Catch-All Route */}
           <Route path="*" element={<NotFound />} />

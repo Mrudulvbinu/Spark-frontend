@@ -40,7 +40,7 @@ const Footer = () => {
   <div className="w-3/4 sm:w-2/3 md:w-1/2 lg:w-1/3 h-px bg-black mt-2 sm:mt-4 md:mt-3 lg:mt-2 mb-2 mx-auto"></div>
   <div className="text-center w-full">
     <img src={c} className="w-5 h-5 inline-block mr-2" />
-    <span>All rights Reserved | Developed by ME</span>
+    <span>All rights Reserved | Developed by MRUDUL</span>
   </div>
 
 </footer>

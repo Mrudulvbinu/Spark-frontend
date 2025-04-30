@@ -168,7 +168,7 @@ function Ohome() {
           ))}
         </div>
       ) : (
-        <p className="text-black text-center text-3xl" data-aos="fade-up">No registered hackathons yet.</p>
+        <p className="text-black text-center text-3xl" data-aos="fade-up">No hackathons hosted yet.</p>
       )}
 </section>
 
@@ -206,7 +206,7 @@ function Ohome() {
       ))}
       </div>
        ) : (
-        <p className="text-black text-center text-3xl" data-aos="fade-up">No participated events.</p>
+        <p className="text-black text-center text-3xl" data-aos="fade-up">No conducted events.</p>
       )}
       </section>
 </div>

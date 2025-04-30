@@ -115,7 +115,7 @@ import axios from 'axios';
     <div className="flex justify-between items-start">
       <div>
         <h3 className="text-xl font-semibold text-gray-800">
-          {proposal.name || proposal.leaderName} - {proposal.hackathonId?.name || 'Hackathon'}
+          {proposal.name || proposal.leaderName} - {proposal.hackathonId.ename || 'Hackathon Name'}
         </h3>
         <p className="text-gray-600">{proposal.email || proposal.leaderEmail}</p>
         <p className="text-gray-500 text-sm mt-1">
@@ -134,7 +134,7 @@ import axios from 'axios';
     {/* Safely render proposal link only if proposal exists */}
     {proposal.proposal?.url && (
       <div className="mt-3">
-        <a 
+         View Proposal: <a 
   href={`https://res.cloudinary.com/dqrsmvjp9/image/upload/fl_attachment/${proposal.proposal.publicId}.pdf`}
   target="_blank" 
   rel="noopener noreferrer"
@@ -143,7 +143,7 @@ import axios from 'axios';
           <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
           </svg>
-          View Proposal: {proposal.proposal.originalName || 'Untitled'}
+         {proposal.proposal.originalName || 'Untitled'}
         </a>
       </div>
     )}

@@ -19,7 +19,7 @@ const EventCard = ({ hackathon }) => {
     <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
       <div className="p-4">
         <h3 className="text-lg font-bold bg-gradient-to-r from-rose-600 to-orange-400 bg-clip-text text-transparent">
-          {hackathon.name}
+          {hackathon.ename}
         </h3>
         <div className="mt-2 text-sm text-gray-600">
           <p className="flex items-center">
@@ -28,7 +28,7 @@ const EventCard = ({ hackathon }) => {
           </p>
           <p className="flex items-center mt-1">
             <FiUserCheck className="mr-2" />
-            {hackathon.organizer?.name || 'Unknown Organizer'}
+            Organizer: {hackathon.orgname}
           </p>
         </div>
         <button
@@ -360,7 +360,7 @@ function Ahome() {
                 </div>
               </div>
               
-              {/* Conducted Events Section */}
+              {/* Past Events Section */}
               <div>
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
                   <span className="bg-gradient-to-r from-rose-600 to-orange-600 bg-clip-text text-transparent">

@@ -184,6 +184,7 @@ export default function TeamHackathonDetails() {
             <Divider sx={{ mb: 2 }}/>
             
             <Stack spacing={2}>
+            <Typography><strong>Organized by:</strong> {event.orgname || "Not Found"}</Typography> 
               <Typography><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</Typography>
               <Typography><strong>Venue:</strong> {event.venue}</Typography>
               <Typography><strong>Duration:</strong> {event.durofhk}</Typography>

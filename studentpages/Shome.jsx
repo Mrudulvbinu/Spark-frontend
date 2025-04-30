@@ -143,6 +143,7 @@ function Shome() {
                 <p className="text-lg">📅 Date: {event.date}</p>
                 <p className="text-lg">📍 Venue: {event.venue}</p>
                 <p className="text-lg">🏆 Prize: {event.prize}</p>
+                <p className="text-lg">🏤 Organizer: {event.orgname}</p>
                 <div className="flex justify-between mt-3 gap-8">
                   <button onClick={() => handleRegister(event)} className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold cursor-pointer
                    hover:shadow-xl transition-transform duration-300 hover:scale-110 min-w-[120px]">Register</button>
@@ -167,6 +168,7 @@ function Shome() {
                 <p className="text-lg">📅 Date: {event.date}</p>
                 <p className="text-lg">💻 Platform: {event.venue}</p>
                 <p className="text-lg">🏆 Prize: {event.prize}</p>
+                <p className="text-lg">🏤 Organizer: {event.orgname}</p>
                 <div className="flex justify-between mt-3 gap-8">
                   <button onClick={() => handleRegister(event)} className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold cursor-pointer
                    hover:shadow-xl transition-transform duration-300 hover:scale-110 min-w-[120px]">Register</button>

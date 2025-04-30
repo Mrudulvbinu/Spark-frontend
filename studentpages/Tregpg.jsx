@@ -29,7 +29,7 @@
   
     const navigate = useNavigate();
     const { hackathonId } = useParams();
-  
+    const [orgname, setOrgname] = useState('');
     const [teamSize, setTeamSize] = useState(1);
     const [members, setMembers] = useState([{}]);
     const [hasParticipated, setHasParticipated] = useState(null);

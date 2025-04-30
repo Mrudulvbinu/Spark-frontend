@@ -29,6 +29,7 @@ const Vregpg = () => {
 
   const navigate = useNavigate();
   const { hackathonId } = useParams();
+  const [orgname, setOrgname] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [hasParticipated, setHasParticipated] = useState(null);
   const [file, setFile] = useState(null);

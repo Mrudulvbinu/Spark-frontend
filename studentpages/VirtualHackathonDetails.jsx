@@ -185,6 +185,7 @@ export default function VirtualHackathonDetails() {
             <Divider sx={{ mb: 2 }}/>
             
             <Stack spacing={2}>
+              <Typography><strong>Organized by:</strong> {event.orgname || "Not Found"}</Typography> 
               <Typography><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</Typography>
               <Typography><strong>Platform:</strong> {event.venue || "To be announced"}</Typography>
               <Typography><strong>Duration:</strong> {event.durofhk}</Typography>
