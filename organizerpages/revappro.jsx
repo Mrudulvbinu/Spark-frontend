@@ -115,7 +115,7 @@ import axios from 'axios';
     <div className="flex justify-between items-start">
       <div>
         <h3 className="text-xl font-semibold text-gray-800">
-          {proposal.name || proposal.leaderName} - {proposal.hackathonId.ename || 'Hackathon Name'}
+          {proposal.name || proposal.leaderName} - {proposal.hackathonId?.ename || 'Hackathon Name'}
         </h3>
         <p className="text-gray-600">{proposal.email || proposal.leaderEmail}</p>
         <p className="text-gray-500 text-sm mt-1">
